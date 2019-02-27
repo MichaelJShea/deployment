@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Wishes</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="/wishes">Hi {{request.session.first_name}}</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+              <ul class="navbar-nav">
+                <li class="nav-item active">
+                  <a class="nav-link" href="/wishes/stats">View Stats<span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/wishes/new">Make A Wish</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/logout">Logout</a>
+                </li>
+              </ul>
+            </div>
+    </nav>
+    <div class="container col-10">
+      <h3>Your Wish List:</h3>
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Item</th>
+            <th scope="col">Date Added</th>
+            <th scope="col">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for wish in wishes   %}
+          <tr>
+            <th scope="row">{{wish.item}}</th>
+            <td>{{ wish.created_at}}</td>
+            <td>
+              <a class="btn btn-outline-info" href="/delete/{{wish.id}}" role="button">Remove</a>
+              <a class="btn btn-outline-info" href="/wishes/edit/{{wish.id}}" role="button">Edit</a>
+              <a class="btn btn-outline-info" href="/grant_wish/{{wish.id}}" role="button">Granted</a>
+            </td>
+          </tr>
+          {% endfor  %}
+        </tbody>
+      </table>
+    </div>
+    <hr>
+    <div class="container col-10">
+      <h3>Granted Wishes:</h3>
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Item</th>
+            <th scope="col">Wisher</th>
+            <th scope="col">Date Added</th>
+            <th scope="col">Date Granted</th>
+            <th scope="col">Likes</th>
+            <th scope="col">Actions</th>
+            
+          </tr>
+        </thead>
+        <tbody>
+          {% for wish in granted   %}
+          <tr>
+            <th scope="row">{{wish.item}}</th>
+            <td>{{wish.wisher.first_name}} {{wish.wisher.last_name}}</td>
+            <td>{{wish.created_at}}</td>
+            <td>{{wish.granted_at}}</td>
+            <td>{{wish.likes.all.count}}</td>
+            <td>
+              <a class="btn btn-outline-info" href="/like_wish/{{wish.id}}" role="button">Like</a>
+            </td>
+          </tr>
+          {% endfor  %}
+        </tbody>
+      </table>
+    </div>
+      
+      </body
+</html>

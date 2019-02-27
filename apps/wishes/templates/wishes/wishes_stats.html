@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Stats</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+</head>
+<body>
+        <a class="btn btn-outline-infor" href="/wishes" role="button">Dahsboard</a>
+    <div class="container mt-4">
+        <h1>Hello {{request.session.first_name}} Here are your stats</h1>
+        <h3>Total granted wishes so far for all users: {{all_granted_wishes.count}}</h3>
+        <h5>Your granted wishes:{{user_granted_wishes.count}}</h5>
+        <h5>Your pending wishes: {{not_granted.count}}</h5>
+
+    </div>
+    
+</body>
+</html>
